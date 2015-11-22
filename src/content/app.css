@@ -1,0 +1,27 @@
+body {
+  background-color: #edecec;
+}
+
+header {
+  text-align: center;
+}
+
+main {
+  background-color: white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+
+main > table td:first-child,
+main > table th:first-child {
+  padding-left: 40px;
+}
+
+main > table td:last-child,
+main > table th:last-child {
+  padding-right: 40px;
+}
+
+main > table tbody {
+  border-bottom: none;
+}
