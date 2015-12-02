@@ -1,0 +1,21 @@
+<form  name="personForm" class="small-12 columns" *ng-if="person" (ng-submit)="onSubmit(person)" #pf="form" novalidate>
+  <hr/>
+  <div class="row">
+    <div class="small-12 columns">
+      <label>
+        First name
+        <input type="text" name="firstName" [(ng-model)]="person.firstName" ng-control="first-name" required/>
+      </label>
+    </div>
+    <div class="small-12 columns">
+      <label>
+        Last name
+        <input type="text" name="lastName" [(ng-model)]="person.lastName" ng-control="last-name" required/>
+      </label>
+    </div>
+    <div class="small-12 columns">
+      <button class="button float-right" type="submit" [disabled]="!pf.form.valid" [ng-class]="{'disabled': !pf.form.valid}">Confirm</button>
+      <a class="button secondary float-right" (click)="onCanceled()">Cancel</a>
+    </div>
+  </div>
+</form>

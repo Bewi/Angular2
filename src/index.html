@@ -4,6 +4,18 @@
     <title>Angular 2.0</title>
     <link rel="stylesheet" href="./content/foundation.min.css"/>
     <link rel="stylesheet" href="./content/app.css"/>
+    <script type="text/javascript" src="../node_modules/systemjs/dist/system.src.js"></script>
+    <script type="text/javascript" src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script type="text/javascript">
+        System.config({
+          packages: {
+            'app': {
+              defaultExtension: 'js'
+            }
+          }
+        });
+        System.import('app/app.component');
+    </script>
   </head>
   <body>
       <header>
@@ -11,36 +23,8 @@
           <h1>Angular 2.0 Playground</h1>
         </div>
       </header>
-      <main class="row ">
-        <div class="small-12 columns">
-          <h2>Poeple</h2>
-        </div>
-        <table class="small-12 hover">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First name</th>
-              <th>Last name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>007</td>
-              <td>Anne</td>
-              <td>Honymous</td>
-            </tr>
-            <tr>
-              <td>008</td>
-              <td>Jean</td>
-              <td>Honymous</td>
-            </tr>
-            <tr>
-              <td>009</td>
-              <td>Mike</td>
-              <td>Honymous</td>
-            </tr>
-          </tbody>
-        </table>
+      <main class="row">
+        <my-app></my-app>
       </main>
   </body>
 </html>
