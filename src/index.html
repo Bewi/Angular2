@@ -2,19 +2,28 @@
 <html>
   <head>
     <title>Angular 2.0</title>
-    <link rel="stylesheet" href="./content/foundation.min.css"/>
-    <link rel="stylesheet" href="./content/app.css"/>
-    <script type="text/javascript" src="../node_modules/systemjs/dist/system.src.js"></script>
-    <script type="text/javascript" src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+    <link rel="stylesheet" href="content/foundation.min.css"/>
+    <link rel="stylesheet" href="content/app.css"/>
+    
+    <script type="text/javascript" src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script type="text/javascript" src="node_modules/systemjs/dist/system-polyfills.js"></script>
+    
+    <script type="text/javascript" src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script type="text/javascript" src="node_modules/systemjs/dist/system.src.js"></script>
+    <script type="text/javascript" src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script type="text/javascript" src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    
     <script type="text/javascript">
         System.config({
-          packages: {
-            'app': {
-              defaultExtension: 'js'
+            packages: {
+                'app': {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
             }
-          }
         });
-        System.import('app/app.component');
+        System.import('app/build/main')
+            .then(null, console.error.bind(console));
     </script>
   </head>
   <body>
@@ -24,7 +33,7 @@
         </div>
       </header>
       <main class="row">
-        <my-app></my-app>
+        <my-app>Loading ...</my-app>
       </main>
   </body>
 </html>

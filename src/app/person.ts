@@ -1,7 +1,5 @@
-export class Person {
-  constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string
-  ){}
+export interface Person {
+    id: number,
+    firstName: string,
+    lastName: string
 }

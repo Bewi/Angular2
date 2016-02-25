@@ -1,4 +1,5 @@
-import { Component, EventEmitter, CORE_DIRECTIVES, FORM_DIRECTIVES } from "angular2/angular2";
+import { Component, EventEmitter } from "angular2/core";
+import { NgClass } from "angular2/common";
 import { Person } from "./person";
 
 @Component({
@@ -6,7 +7,7 @@ import { Person } from "./person";
   templateUrl: "app/person-editor.component.html",
   events: ['canceled', 'validated'],
   properties: ['person'],
-  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
+  directives: [NgClass]
 })
 export class PersonForm  {
   canceled = new EventEmitter();

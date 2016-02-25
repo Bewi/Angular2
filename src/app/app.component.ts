@@ -1,47 +1,51 @@
-import { bootstrap, Component, CORE_DIRECTIVES, FORM_DIRECTIVES } from "angular2/angular2";
+import { Component } from "angular2/core";
+import { NgClass } from 'angular2/common';
 import { Person } from "./person";
 import { PersonForm } from "./person-editor.component";
 import { PeopleService } from "./people-service";
 
 @Component({
-  selector: 'my-app',
-  templateUrl: 'app/app.component.html',
-  directives: [CORE_DIRECTIVES, PersonForm],
-  providers: [PeopleService]
+    selector: 'my-app',
+    templateUrl: 'app/app.component.html',
+    directives: [NgClass, PersonForm],
+    providers: [PeopleService]
 })
-class AppComponent {
-  public title : string = 'People';
+export class AppComponent {
+    public title : string = 'People';
 
-  private selectedPerson : Person;
+    private selectedPerson : Person;
 
-  public people : Person[];
+    public people : Person[];
 
-  constructor(peopleService : PeopleService) {
-    this.people = peopleService.getAll();
-  }
+    constructor(peopleService : PeopleService) {
+        this.people = peopleService.getAll();
+    }
 
-  public onCanceled() {
-    this.selectedPerson = null;
-  }
+    public onCanceled() {
+        this.selectedPerson = null;
+    }
 
-  public onValidated(updatedPerson: Person) {
-    var person = this.people.find(p => p.id == updatedPerson.id);
-    person.firstName = updatedPerson.firstName;
-    person.lastName = updatedPerson.lastName;
+    public onValidated(updatedPerson: Person) {
+        var index = this.people.map(function(p){ return p.id; }).indexOf(updatedPerson.id)
+        var person = this.people[index];
+        person.firstName = updatedPerson.firstName;
+        person.lastName = updatedPerson.lastName;
 
-    this.selectedPerson = null;
-  }
+        this.selectedPerson = null;
+    }
 
-  public onSelect(person : Person) {
-    if (this.selectedPerson == person)
-      this.selectedPerson = null;
-    else
-      this.selectedPerson = new Person(person.id, person.firstName, person.lastName);
-  }
+    public onSelect(person : Person) {
+        if (this.selectedPerson && this.selectedPerson.id == person.id)
+            this.selectedPerson = null;
+        else
+            this.selectedPerson = {
+                id: person.id,
+                firstName: person.firstName,
+                lastName: person.lastName 
+            };
+    }
 
-  public getSelectedClass(person : Person) {
-    return { 'selected': this.selectedPerson && this.selectedPerson.id == person.id };
-  }
+    public getSelectedClass(person : Person) {
+        return { 'selected': this.selectedPerson && this.selectedPerson.id == person.id };
+    }
 }
-
-bootstrap(AppComponent);
