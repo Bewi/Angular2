@@ -4,7 +4,14 @@ var express = require('express'),
     people = require('./models/people.js'),
     R = require('ramda');
     
- app.use(bodyParser.json());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+    
+app.use(bodyParser.json());
     
 app.get('/', function(req, res, next) {
     res.send('Hello space');
@@ -28,16 +35,19 @@ app.put('/person', function(req, res, next) {
     personToUpdate.firstName = person.firstName;
     personToUpdate.lastName = person.lastName;
             
+    res.send(person);
     res.sendStatus(200);
+    
 });
 
 app.post('/person', function(req, res, next) {
     
-    var lastId = R.sortBy(R.prop('id'), people)[0].id;
+    var lastId = R.sortBy(R.prop('id'), people)[people.length - 1].id;
     var person = req.body;
     person.id = lastId + 1;
     people.push(person);
-     
+    
+    res.send(person);
     res.sendStatus(200); 
 });
 
